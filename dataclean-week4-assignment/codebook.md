@@ -4,10 +4,11 @@ CodeBook.md
 ##Field list: 
 
 | Field Name    | Field data type | Data detail  |
-| ------------- |:-------------:|-----:|
+| ------------- |:-------------:|:-----:|
 | subject      | Object who is conduting the test | 1-30. There are total 30 tests in the test |
+| activity    | the activity that user conducted  |  Detail field value mapping to activity name as below |
 
-| activity    | the activity that user conducted  |  |
+Activity Mapping: 
 
 + 1 WALKING 
 + 2 WALKING_UPSTAIRS 
