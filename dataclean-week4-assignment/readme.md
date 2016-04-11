@@ -13,6 +13,8 @@ List of file:
 + CodeBook.md - schema for tidy data
 + run_analysis.R - a script that is used to create this tidy data from original data
 + tidySmartphonesDataset.csv -  Average of each variable for each activity and each subject. You could reproduce the data using run_analysis.R. 
++ feature_info.txt - Copy from orginal file, contains detail description for feature fields. 
++ features_name.txt - contains feature names. run_analysis.R use this file to get feature field names. 
 
 
 ### Assumption
@@ -27,15 +29,5 @@ Assuming that in original data, records are link by order, and one-one mapping. 
 
 Original data source - Coursera Data cleaning week 4 assignment. 
 
-Below is copy from original read me file. 
-
-==================================================================
-Human Activity Recognition Using Smartphones Dataset
-Version 1.0
-==================================================================
-Jorge L. Reyes-Ortiz, Davide Anguita, Alessandro Ghio, Luca Oneto.
-Smartlab - Non Linear Complex Systems Laboratory
-DITEN - Università degli Studi di Genova.
-Via Opera Pia 11A, I-16145, Genoa, Italy.
-activityrecognition@smartlab.ws
-www.smartlab.ws
+>Human Activity Recognition Using Smartphones Dataset
+>Version 1.0
