@@ -1,4 +1,3 @@
-CodeBook.md
 # CodeBook
 
 ##Field list: 
