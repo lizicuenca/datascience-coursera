@@ -7,7 +7,7 @@ CodeBook.md
 | ------------- |:-------------:|-----:|
 | subject      | Object who is conduting the test | 1-30. There are total 30 tests in the test |
 
-| activity    | the activity that user conducted  |  
+| activity    | the activity that user conducted  |  |
 
 + 1 WALKING 
 + 2 WALKING_UPSTAIRS 
