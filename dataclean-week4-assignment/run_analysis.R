@@ -73,7 +73,7 @@ converFeaturesToCSV <- function(){
 #
 getCleanDataFeatures <- function(featuresCSVFile){
   
-  featuresDF <- read.csv(fileName_FeaturesCSV,header = FALSE, colClasses =nColClasses )
+  featuresDF <- read.csv(featuresCSVFile,header = FALSE )
   
   flog.info("read features - read from csv: length  %d", length(featuresDF))
   
@@ -85,49 +85,49 @@ getCleanDataFeatures <- function(featuresCSVFile){
   #select only required data field
   featuresDFSub <- featuresDF[,grep("_mean_|_std_",fieldnames)]
   
-  #split each field into two fields
-  fieldnames <- names(featuresDFSub)
+#   #split each field into two fields
+#   fieldnames <- names(featuresDFSub)
+#   
+#   splitDF  <- data.frame()
+#   
+#   splitlist <- list() #create an empty list
+#   splitColNames <- list()
+#   
+#   for (i in 1:length(fieldnames)){
+#     
+#     fieldNameToSplit = fieldnames[i]
+#     asplit <- strsplit(as.character(featuresDFSub[,i]),'e[-+]')
+#     
+#     splitlist[[i]] <- sapply(asplit, "[[", 1)
+#     #splitlist[[i*2]] <- sapply(asplit, "[[", 2)
+#     
+#     splitColNames[i] <- fieldNameToSplit
+#     
+#     
+#     # foo <- data.frame(do.call('rbind',strsplit(as.character(featuresDFSub$fieldNameToSplit),'e-',fixed=TRUE))
+#     
+#   }
+#   
+#   flog.info("read features - A list")
+#   
+#   
+#   df <- do.call("rbind",splitlist) #combine all vectors into a matrix
+#   df <- data.frame(t(df))
+#   
+#   names(df) <- splitColNames
+#   
+#   flog.info("read features - set data type")
+#   
+#   # transform data into right data format: 
+#   #features <- grep(".axial", names(df),invert = TRUE)
+# #  df[, ] <- sapply(df[,], as.numeric)
+#   # work on axial 
+#   #features <- grep(".axial", names(df))
+#   #df[, features] <- sapply(df[, features], as.factor)
   
-  splitDF  <- data.frame()
+#  flog.info("read features - Finished - result data size %d", length(df))
   
-  splitlist <- list() #create an empty list
-  splitColNames <- list()
-  
-  for (i in 1:length(fieldnames)){
-    
-    fieldNameToSplit = fieldnames[i]
-    asplit <- strsplit(as.character(featuresDFSub[,i]),'e[-+]')
-    
-    splitlist[[i*2-1]] <- sapply(asplit, "[[", 1)
-    splitlist[[i*2]] <- sapply(asplit, "[[", 2)
-    
-    splitColNames[i*2-1] <- fieldNameToSplit
-    splitColNames[i*2] <-  paste(fieldNameToSplit,".axial" , sep='')
-    
-    # foo <- data.frame(do.call('rbind',strsplit(as.character(featuresDFSub$fieldNameToSplit),'e-',fixed=TRUE))
-    
-  }
-  
-  flog.info("read features - A list")
-  
-  
-  df <- do.call("rbind",splitlist) #combine all vectors into a matrix
-  df <- data.frame(t(df))
-  
-  names(df) <- splitColNames
-  
-  flog.info("read features - set data type")
-  
-  # transform data into right data format: 
-  #features <- grep(".axial", names(df),invert = TRUE)
-  df[, ] <- sapply(df[,], as.numeric)
-  # work on axial 
-  features <- grep(".axial", names(df))
-  df[, features] <- sapply(df[, features], as.factor)
-  
-  flog.info("read features - Finished - result data size %d", length(df))
-  
-  df
+#  df
 
 }
 
@@ -136,8 +136,8 @@ getCleanDataFeatures <- function(featuresCSVFile){
 #  
 getCleanData <- function(subjectFile,activityFile,featuresCSVFile  ){
 
-  subjectDF <- read.csv(fileName_Subject, header = FALSE )
-  activityDF <- read.csv(fileName_Activity, header = FALSE)
+  subjectDF <- read.csv(subjectFile, header = FALSE )
+  activityDF <- read.csv(activityFile, header = FALSE)
 
   
   # reduce data volume by only number of that we need - using activity table row number
@@ -185,14 +185,15 @@ combineData <- function(){
 #
 getTidyData <- function(richDF){
   
-  library(dplyr)
+  #library(dplyr)
   
-  tidyDF <- testDF[,grep(".axial", names(df),invert = TRUE)]
-  tidyDF$subject <- testDF[,"subject"]
-  tidyDF$activity <- testDF[,"activity"]
+  #tidyDF <- testDF[,grep(".axial", names(df),invert = TRUE)]
+  #tidyDF$subject <- richDF[,"subject"]
+  #tidyDF$activity <- richDF[,"activity"]
   
-  tidyDF1 <- tidyDF %>% group_by(subject, activity) %>% 
-          summarise_each(funs(mean),-(133:134))
+ # tidyDF1 <- tidyDF %>% group_by(subject, activity) %>% 
+  #        summarise_each(funs(mean),-(133:134))
+  tidy <- aggregate(. ~ subject + activity, richDF, mean)
   
 }
 
